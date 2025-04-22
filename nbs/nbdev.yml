@@ -1,0 +1,9 @@
+project:
+  output-dir: _docs
+
+website:
+  title: "NEST"
+  site-url: "https://plezar.github.io/NEST"
+  description: "NEST – Nuclear Extraction and Segmentation Tool"
+  repo-branch: main
+  repo-url: "https://github.com/plezar/NEST"
