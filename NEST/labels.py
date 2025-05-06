@@ -14,6 +14,7 @@ from typing import Tuple
 from skimage.segmentation import find_boundaries
 from scipy.ndimage import distance_transform_edt
 from imageio import imwrite
+from skimage.util import img_as_ubyte
 
 
 def predict(
@@ -55,8 +56,7 @@ def predict(
 def plot_outlines(
     mask: np.ndarray,
     image: np.ndarray,
-    save_path: str = None,
-    ax: plt.Axes = None
+    save_path: str = None
 ):
     """
     Overlay nuclear outlines from a mask onto an image and optionally save the result.
@@ -77,6 +77,7 @@ def plot_outlines(
     ax : matplotlib.axes.Axes
         Axes object displaying the overlay.
     """
+    image = img_as_ubyte(image)
     boundaries = find_boundaries(mask, mode='outer')
     outline_image = np.zeros_like(mask, dtype=np.uint8)
     outline_image[boundaries] = 255
