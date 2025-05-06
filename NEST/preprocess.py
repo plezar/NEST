@@ -8,16 +8,11 @@ __all__ = ['clahe']
 # %% ../nbs/00_preprocess.ipynb 3
 from skimage.segmentation import find_boundaries, expand_labels
 from imageio import imwrite
-import tifffile
 import cv2
-import matplotlib.pyplot as plt
-from cellpose import models, io
-from typing import List, Tuple, Dict
+from typing import Tuple
 from scipy.optimize import linear_sum_assignment
 from scipy.ndimage import distance_transform_edt
-import itertools
 import numpy as np
-import os
 
 # %% ../nbs/00_preprocess.ipynb 4
 def clahe(

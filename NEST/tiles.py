@@ -6,11 +6,8 @@
 __all__ = ['count', 'split', 'save', 'stitch']
 
 # %% ../nbs/01_tiles.ipynb 3
-import os
-import itertools
 from pathlib import Path
 from typing import List, Tuple, Dict
-import cv2
 
 import numpy as np
 import tifffile as tiff
