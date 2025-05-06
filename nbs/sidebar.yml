@@ -1,0 +1,7 @@
+website:
+  sidebar:
+    contents:
+      - index.ipynb
+      - 00_preprocess.ipynb
+      - 01_tiles.ipynb
+      - 02_labels.ipynb
