@@ -203,7 +203,7 @@ plt.show()
 #### Reading the Input Image
 
 ``` python
-filename="../data/tissue_hires_image.png"
+filename="../data/FixedFrozen_HE.png"
 mask = np.load('../cache/FixedFrozen_MouseBrain_mask.npy')
 ihc_rgb = cv2.imread(filename)[...,::-1]
 ```
@@ -234,8 +234,8 @@ plt.show()
 
 ![](index_files/figure-commonmark/cell-15-output-1.png)
 
-We will use the deconvolved eosin image for sementation. First, we
-convert the image to grayscale and invert it.
+We will use the deconvolved eosin image for nuclear sementation. First,
+we convert the image to grayscale and invert it.
 
 ``` python
 gray_image = cv2.cvtColor(ihc_e.astype(np.float32), cv2.COLOR_RGB2GRAY)
@@ -252,7 +252,7 @@ plt.show()
 ``` python
 tiles, x, y = split(gray_image, tile_size = (128, 128), overlap = 20)
 
-plt.imshow(tiles[300], cmap='gray')
+plt.imshow(tiles[20], cmap='gray')
 plt.axis('off')
 plt.show()
 
@@ -276,141 +276,12 @@ np.save('../cache/FixedFrozen_MouseBrain_mask.npy', mask)
     no seeds found in get_masks_torch - no masks found.
     no seeds found in get_masks_torch - no masks found.
     no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
-    no seeds found in get_masks_torch - no masks found.
 
 ``` python
 fig, axes = plt.subplots(1, 4, figsize=(16,4))
 titles = ['Tile 1', 'Tile 2', 'Tile 3', 'Tile 4']
 
-for ax, m, img, title in zip(axes, mask[300:304], tiles[300:304], titles):
+for ax, m, img, title in zip(axes, mask[20:24], tiles[20:24], titles):
     overlay = plot_outlines(m, img)
     ax.imshow(overlay)
     ax.axis('off')
