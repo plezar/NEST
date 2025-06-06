@@ -18,38 +18,62 @@ from skimage.util import img_as_ubyte
 
 
 def predict(
-    model_path: str,
     img_list: list,
     use_gpu: bool,
-    cellpose_param: tuple
+    model_path: str = None,
+    diameters: float = None,
+    cellpose_param: tuple = (0.4, 0.0)
 ) -> np.ndarray:
     """
-    Run a pretrained Cellpose model to generate segmentation masks for a list of images.
+    Run a Cellpose segmentation model to generate segmentation masks for a list of images.
+
+    This function loads a Cellpose model and applies it to each image in the provided list.
+    If a custom model path is given, it uses that pretrained model; otherwise, it defaults to the
+    nuclei segmentation model. The segmentation thresholds can be controlled via cellpose_param,
+    and an estimated diameter of the objects (nuclei) to segment can be provided when using the default model.
 
     Parameters
     ----------
-    model_path : str
-        Path to the pretrained Cellpose model file.
-    img_list : iterable
-        Iterable of image arrays to segment.
-    cellpose_param : tuple of float
-        Tuple specifying (flow_threshold, cellprob_threshold) for Cellpose evaluation.
+    img_list : list of np.ndarray
+        A list of image arrays (grayscale) to segment.
+    use_gpu : bool
+        Indicates whether to use GPU acceleration for model evaluation.
+    model_path : str, optional
+        Path to a custom pretrained Cellpose model. If None, the default nuclei model is used.
+    diameters : float, optional
+        Estimated diameter (in pixels) of the objects (nuclei) to segment. This is used only when model_path is None.
+    cellpose_param : tuple of two floats, optional
+        A tuple (flow_threshold, cellprob_threshold) to control the Cellpose evaluation parameters.
+        Defaults to (0.4, 0.0).
 
     Returns
     -------
-    mask : np.ndarray
+    np.ndarray
         Array of shape (N, H, W) containing the segmentation masks for each input image.
     """
-    model_ft = models.CellposeModel(
-        gpu=use_gpu,
-        pretrained_model=model_path
-    )
-    mask, flow, style = model_ft.eval(
-        list(img_list),
-        flow_threshold=cellpose_param[0],
-        cellprob_threshold=cellpose_param[1],
-        channels=[0, 0]
-    )
+    if model_path:
+        model = models.CellposeModel(
+            gpu=use_gpu,
+            pretrained_model=model_path
+        )
+        print(f"Using custom Cellpose model from {model_path} for segmentation.")
+        mask, flow, style = model.eval(
+            list(img_list),
+            flow_threshold=cellpose_param[0],
+            cellprob_threshold=cellpose_param[1],
+            channels=[0, 0]
+        )
+    else:
+        model = models.Cellpose(gpu=use_gpu, model_type='nuclei')
+        print("Using default Cellpose model for nuclei segmentation.")
+        mask, diams, flow, style = model.eval(
+            list(img_list),
+            flow_threshold=cellpose_param[0],
+            cellprob_threshold=cellpose_param[1],
+            diameter=diameters,
+            channels=[0, 0]
+        )
+
     return mask
 
 
