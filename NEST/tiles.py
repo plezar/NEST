@@ -295,7 +295,7 @@ def _process_tile(
     mapping, next_label = _build_label_mapping(mask, region, iou_threshold, next_label)
     remapped = _remap_tile(mask, mapping)
 
-    update_mask = (region == 0) & (remapped != 0)
+    update_mask = (remapped != 0) # & (region == 0)
     region[update_mask] = remapped[update_mask]
     global_mask[y0:y0 + h, x0:x0 + w] = region
 
