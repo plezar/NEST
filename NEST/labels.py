@@ -140,14 +140,8 @@ def get_physical_size(
 
         rx_num, rx_den = page.tags['XResolution'].value
         ry_num, ry_den = page.tags['YResolution'].value
-        unit_code = page.tags['ResolutionUnit'].value
 
-        if unit_code == 2:
-            um_per_unit = 25400.0
-        elif unit_code == 3:
-            um_per_unit = 10000.0
-        else:
-            raise ValueError(f"Unexpected ResolutionUnit {unit_code}")
+        um_per_unit = 1
 
         px_per_unit_x = rx_num / rx_den
         px_per_unit_y = ry_num / ry_den
