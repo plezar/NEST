@@ -11,10 +11,13 @@ import numpy as np
 import tifffile
 from cellpose import models, io
 import matplotlib.pyplot as plt
+from matplotlib import cm
 from typing import Tuple
 from skimage.segmentation import find_boundaries
 from scipy.ndimage import distance_transform_edt
+from skimage.segmentation import find_boundaries
 from imageio import imwrite
+import pandas as pd
 from skimage.util import img_as_ubyte
 
 
@@ -359,20 +362,18 @@ def plot_channel_mask(mask, channel1, channel2=None, channel3=None, save_path=No
         # build an empty RGB image
         rgb = np.zeros(mask.shape + (3,), dtype=float)
 
-        # channel1 → green
+        # channel1 → Green
         rgb[..., 1] = c1
 
-        # channel2 → magenta (red + blue)
-        rgb[..., 0] = c2   # red
-        rgb[..., 2] = c2   # blue
+        # channel2 → Red
+        rgb[..., 0] = c2
 
-        # channel3 → yellow (red + green)
-        rgb[..., 0] = np.clip(rgb[..., 0] + c3, 0, 1)  # add to red
-        rgb[..., 1] = np.clip(rgb[..., 1] + c3, 0, 1)  # add to green
+        # channel3 → Blue
+        rgb[..., 2] = c3
     else:
         # Single channel: use Spectral colormap
         img_norm = normalize(channel1)
-        cmap = cm.get_cmap('Spectral').reversed()
+        cmap = plt.get_cmap('Spectral').reversed()
         rgb = cmap(img_norm)[..., :3]
     
     # Mask background outside cells to black
